@@ -1,3 +1,5 @@
+using PUMP.core.BL.Interfaces;
+using PUMP.core.BL.Services;
 using PUMP.helpers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +13,9 @@ builder.Services.AddSwaggerGen();
 
 // // Get string connection
 Settings.ConnectionString = builder.Configuration.GetConnectionString("path");
+
+// Add dependency injection
+builder.Services.AddTransient<IAuthentication, AuthenticationServices>();
 
 var app = builder.Build();
 
