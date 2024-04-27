@@ -16,6 +16,7 @@ Settings.ConnectionString = builder.Configuration.GetConnectionString("path");
 
 // Add dependency injection
 builder.Services.AddTransient<IAuthentication, AuthenticationServices>();
+builder.Services.AddTransient<IEmployees, EmployeesServices>();
 
 var app = builder.Build();
 
