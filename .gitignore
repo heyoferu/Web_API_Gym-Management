@@ -1,0 +1,10 @@
+###[paths]
+.idea/
+*/bin
+*/obj
+*/Properties
+##[files]
+API.sln
+*/appset*.json
+*/*.csproj
+*/*.http
