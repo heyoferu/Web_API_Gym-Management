@@ -3,10 +3,10 @@ namespace PUMP.core.BL.Interfaces;
 public interface IMembers
 {
     // Create new members
-    Task<bool> Save(models.Members members);
+    Task<bool> Create(models.Members members);
     
     // Read all members
-    Task<List<models.Members>> Get();
+    Task<List<models.Members>> Read();
     
     // Update members
     Task<bool> Update(models.Members members);

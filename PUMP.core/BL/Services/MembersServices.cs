@@ -5,7 +5,7 @@ namespace PUMP.core.BL.Services;
 
 public class MembersServices : IMembers
 {
-    public Task<bool> Save(Members members)
+    public Task<bool> Create(Members members)
     {
         bool result = false;
 
@@ -32,7 +32,7 @@ public class MembersServices : IMembers
         return Task.FromResult(result);
     }
 
-    public Task<List<Members>> Get()
+    public Task<List<Members>> Read()
     {
         List<Members> list = new List<Members>();
         using (var connection = new data.SQLServer.InitDb())

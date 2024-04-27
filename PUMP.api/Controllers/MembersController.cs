@@ -17,9 +17,9 @@ public class MembersController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Members members)
+    public async Task<IActionResult> CreateMembers([FromBody] Members members)
     {
-        var result = await this._members.Save(members);
+        var result = await this._members.Create(members);
         if (!result)
         {
             return BadRequest(result);
@@ -29,14 +29,14 @@ public class MembersController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<IActionResult> Read()
+    public async Task<IActionResult> ReadMembers()
     {
-        var result = await this._members.Get();
+        var result = await this._members.Read();
         return Ok(result);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] Members members)
+    public async Task<IActionResult> UpdateMebers([FromBody] Members members)
     {
         var result = await this._members.Update(members);
         if (!result)
@@ -48,7 +48,7 @@ public class MembersController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] Members members)
+    public async Task<IActionResult> DeleteMembers([FromBody] Members members)
     {
         var result = await this._members.Delete(members);
         if (!result)
