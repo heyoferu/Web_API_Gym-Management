@@ -16,9 +16,9 @@ public class EmployeesController : ControllerBase
     }
     
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] Employees employees)
+    public async Task<IActionResult> CreateEmployees([FromBody] Employees employees)
     {
-        var result = await this._employees.SaveEmployees(employees);
+        var result = await this._employees.Create(employees);
         if (result == false)
         {
             return BadRequest(result);
@@ -28,16 +28,16 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> Read()
+    public async Task<IActionResult> ReadEmployees()
     {
-        var result = await this._employees.GetEmployees();
+        var result = await this._employees.Read();
         return Ok(result);
     }
     
     [HttpPut]
-    public async Task<IActionResult> Update([FromBody] Employees employees)
+    public async Task<IActionResult> UpdateEmployees([FromBody] Employees employees)
     {
-        var result = await this._employees.UpdateEmployees(employees);
+        var result = await this._employees.Update(employees);
         if (result == false)
         {
             return BadRequest(result);
@@ -46,9 +46,9 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete([FromBody] Employees employees)
+    public async Task<IActionResult> DeleteEmployees([FromBody] Employees employees)
     {
-        var result = await this._employees.DeleteEmployees(employees);
+        var result = await this._employees.Delete(employees);
         if (result == false)
         {
             return BadRequest(result);

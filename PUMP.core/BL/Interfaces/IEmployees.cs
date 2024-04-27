@@ -4,8 +4,8 @@ namespace PUMP.core.BL.Interfaces;
 
 public interface IEmployees
 {
-    Task<bool> SaveEmployees(models.Employees employees);
-    Task<bool> DeleteEmployees(models.Employees employees);
-    Task<bool> UpdateEmployees(models.Employees employees);
-    Task<List<models.Employees>> GetEmployees();
+    Task<bool> Create(models.Employees employees);
+    Task<List<models.Employees>> Read();
+    Task<bool> Update(models.Employees employees);
+    Task<bool> Delete(models.Employees employees);
 }

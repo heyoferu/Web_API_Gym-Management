@@ -5,7 +5,7 @@ namespace PUMP.core.BL.Services;
 
 public class EmployeesServices : IEmployees
 {
-    public Task<bool> SaveEmployees(Employees employees)
+    public Task<bool> Create(Employees employees)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
@@ -33,7 +33,7 @@ public class EmployeesServices : IEmployees
         return Task.FromResult(result);
     }
 
-    public Task<bool> DeleteEmployees(Employees employees)
+    public Task<bool> Delete(Employees employees)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
@@ -54,7 +54,7 @@ public class EmployeesServices : IEmployees
         return Task.FromResult(result);
     }
 
-    public Task<bool> UpdateEmployees(Employees employees)
+    public Task<bool> Update(Employees employees)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
@@ -80,7 +80,7 @@ public class EmployeesServices : IEmployees
         return Task.FromResult(result);
     }
 
-    public Task<List<Employees>> GetEmployees()
+    public Task<List<Employees>> Read()
     {
         List<Employees> list = new List<Employees>();
         using (var connection = new data.SQLServer.InitDb())
