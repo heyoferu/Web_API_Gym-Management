@@ -10,6 +10,7 @@ public class InitDb : DbContext
     
     public virtual DbSet<Members> Members { get; set; }
     
+    public virtual DbSet<Products> Products { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         if (!optionsBuilder.IsConfigured)
