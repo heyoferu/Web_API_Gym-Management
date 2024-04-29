@@ -18,7 +18,7 @@ Settings.ConnectionString = builder.Configuration.GetConnectionString("path");
 builder.Services.AddTransient<IAuthentication, AuthenticationServices>();
 builder.Services.AddTransient<IEmployees, EmployeesServices>();
 builder.Services.AddTransient<IMembers, MembersServices>();
-
+builder.Services.AddTransient<IProducts, ProductsServices>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
