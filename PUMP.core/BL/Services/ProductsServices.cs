@@ -33,34 +33,47 @@ public class ProductsServices : IProducts
         return Task.FromResult(result);
     }
 
-    public Task<List<Products>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Products> productsList = new List<Products>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Products
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                productsList.Add(new Products()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description,
-                    Price = item.Price,
-                    Category = item.Category,
-                    Stock = item.Stock
-                });
+                var query = (from item in connection.Products
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Description,
+                        item.Price,
+                        item.Category,
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
 
-            return Task.FromResult(productsList);
-
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Products
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Description,
+                        item.Price,
+                        item.Category,
+                        item.Stock
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
     }
-
     public Task<bool> Update(Products products)
     {
         bool result = false;

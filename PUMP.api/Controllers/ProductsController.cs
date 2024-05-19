@@ -22,9 +22,13 @@ public class ProductsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadProducts()
+    public async Task<IActionResult> ReadProducts(int? id)
     {
-        var result = await this._products.Read();
+        var result = await this._products.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
 
         return Ok(result);
     }
