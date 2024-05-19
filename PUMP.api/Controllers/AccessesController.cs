@@ -51,9 +51,9 @@ public class AccessesController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteAccesses([FromBody] Accesses accesses)
+    public async Task<IActionResult> DeleteAccesses(int? id)
     {
-        var result = await this._accesses.Delete(accesses);
+        var result = await this._accesses.Delete(id);
         if (result == false)
         {
             return BadRequest(result);

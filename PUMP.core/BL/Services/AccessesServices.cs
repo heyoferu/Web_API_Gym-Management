@@ -90,14 +90,14 @@ public class AccessesServices : IAccesses
         return Task.FromResult(result);
     }
 
-    public Task<bool> Delete(Accesses accesses)
+    public Task<bool> Delete(int? id)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Accesses
-                where item.Id == accesses.Id
+                where item.Id == id.Value
                 select item
             ).FirstOrDefault();
 
