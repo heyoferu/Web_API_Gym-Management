@@ -28,9 +28,14 @@ public class AccessesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadAccesses()
+    public async Task<IActionResult> ReadAccesses(int? id)
     {
-        var result = await this._accesses.Read();
+        var result = await this._accesses.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
+
         return Ok(result);
     }
     

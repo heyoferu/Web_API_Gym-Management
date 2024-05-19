@@ -30,29 +30,41 @@ public class AccessesServices : IAccesses
         return Task.FromResult(result);
     }
 
-    public Task<List<Accesses>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Accesses> list = new List<Accesses>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Accesses
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new Accesses()
-                {
-                    Id = item.Id,
-                    Membership = item.Membership,
-                    DateSa = item.DateSa
-                });
+                var query = (from item in connection.Accesses
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Membership,
+                        item.DateSa
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Accesses
+                    select new
+                    {
+                        item.Id,
+                        item.Membership,
+                        item.DateSa
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
-        
     }
 
     public Task<bool> Update(Accesses accesses)
