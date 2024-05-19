@@ -28,9 +28,13 @@ public class DetailMembershipsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadDetailMemberships()
+    public async Task<IActionResult> ReadDetailMemberships(int? id)
     {
-        var result = await this._detailMemberships.Read();
+        var result = await this._detailMemberships.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
         return Ok(result);
     }
     
