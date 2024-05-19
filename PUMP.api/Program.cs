@@ -21,6 +21,7 @@ builder.Services.AddTransient<ICategory, CategoryServices>();
 builder.Services.AddTransient<IDetailMemberships, DetailMembershipsServices>();
 builder.Services.AddTransient<IEmployees, EmployeesServices>();
 builder.Services.AddTransient<IMembers, MembersServices>();
+builder.Services.AddTransient<IMemberships, MembershipsServices>();
 builder.Services.AddTransient<IProducts, ProductsServices>();
 var app = builder.Build();
 
