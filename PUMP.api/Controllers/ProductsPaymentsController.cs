@@ -22,10 +22,14 @@ public class ProductsPaymentsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadProductsPayments()
+    public async Task<IActionResult> ReadProductsPayments(int? id)
     {
-        var result = await this._productPayments.Read();
-
+        var result = await this._productPayments.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
+        
         return Ok(result);
     }
 

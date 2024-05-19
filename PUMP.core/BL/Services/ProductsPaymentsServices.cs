@@ -32,31 +32,41 @@ public class ProductsPaymentsServices : IProductsPayments
         return Task.FromResult(result);
     }
 
-    public Task<List<ProductsPayments>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<ProductsPayments> list = new List<ProductsPayments>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.ProductsPayments
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new ProductsPayments()
-                {
-                    Id = item.Id,
-                    Employee = item.Employee,
-                    DatePayment = item.DatePayment,
-                    Product = item.Product,
-                    Quantity = item.Quantity
-                });
+                var query = (from item in connection.Accesses
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Membership,
+                        item.DateSa
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Accesses
+                    select new
+                    {
+                        item.Id,
+                        item.Membership,
+                        item.DateSa
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
-        
     }
 
     public Task<bool> Update(ProductsPayments productsPayments)
