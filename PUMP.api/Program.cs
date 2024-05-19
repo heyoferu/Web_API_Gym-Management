@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 Settings.ConnectionString = builder.Configuration.GetConnectionString("path");
 
 // Add dependency injection
+builder.Services.AddTransient<IAccesses, AccessesServices>();
 builder.Services.AddTransient<IEmployees, EmployeesServices>();
 builder.Services.AddTransient<IMembers, MembersServices>();
 builder.Services.AddTransient<IProducts, ProductsServices>();
