@@ -31,30 +31,43 @@ public class MembershipsServices : IMemberships
         return Task.FromResult(result);
     }
 
-    public Task<List<Memberships>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Memberships> list = new List<Memberships>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Memberships
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new Memberships()
-                {
-                    Id = item.Id,
-                    Member = item.Member,
-                    DateStart = item.DateStart,
-                    DateEnd = item.DateEnd
-                });
+                var query = (from item in connection.Memberships
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Member,
+                        item.DateStart,
+                        item.DateEnd
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Memberships
+                    select new
+                    {
+                        item.Id,
+                        item.Member,
+                        item.DateStart,
+                        item.DateEnd
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
-        
     }
 
     public Task<bool> Update(Memberships memberships)
