@@ -31,31 +31,42 @@ public class EmployeesServices : IEmployees
         return Task.FromResult(result);
     }
     
-    public Task<List<Employees>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Employees> list = new List<Employees>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Employees
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new Employees()
+                var query = (from item in connection.Employees
+                    where item.Id == id.Value
+                    select new
                     {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Lastname = item.Lastname,
-                        Age = item.Age,
-                        Mail = item.Mail,
-                        Password = item.Password,
-                        
-                    });
+                        item.Id,
+                        item.Name,
+                        item.Lastname,
+                        item.Age
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Employees
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Lastname,
+                        item.Age
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
     }
 

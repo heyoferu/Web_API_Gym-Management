@@ -28,9 +28,14 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadEmployees()
+    public async Task<IActionResult> ReadEmployees(int? id)
     {
-        var result = await this._employees.Read();
+        var result = await this._employees.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
+
         return Ok(result);
     }
     
