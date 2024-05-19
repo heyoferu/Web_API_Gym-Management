@@ -30,26 +30,33 @@ public class EmployeesServices : IEmployees
 
         return Task.FromResult(result);
     }
-
-    public Task<bool> Delete(Employees employees)
+    
+    public Task<List<Employees>> Read()
     {
-        bool result = false;
+        List<Employees> list = new List<Employees>();
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Employees
-                where item.Id == employees.Id
                 select item
-            ).FirstOrDefault();
+            ).ToList();
 
-            if (query != null)
+            foreach (var item in query)
             {
-                connection.Employees.Remove(query);
-                result = connection.SaveChanges() > 0;
+                list.Add(new Employees()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        Lastname = item.Lastname,
+                        Age = item.Age,
+                        Mail = item.Mail,
+                        Password = item.Password,
+                        
+                    });
             }
+            
+            return Task.FromResult(list);
         }
-
-        return Task.FromResult(result);
     }
 
     public Task<bool> Update(Employees employees)
@@ -75,29 +82,26 @@ public class EmployeesServices : IEmployees
 
         return Task.FromResult(result);
     }
-
-    public Task<List<Employees>> Read()
+    
+    public Task<bool> Delete(Employees employees)
     {
-        List<Employees> list = new List<Employees>();
+        bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Employees
+                where item.Id == employees.Id
                 select item
-            ).ToList();
+            ).FirstOrDefault();
 
-            foreach (var item in query)
+            if (query != null)
             {
-                list.Add(new Employees()
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Lastname = item.Lastname,
-                        Age = item.Age,
-                    });
+                connection.Employees.Remove(query);
+                result = connection.SaveChanges() > 0;
             }
-            
-            return Task.FromResult(list);
         }
+
+        return Task.FromResult(result);
     }
+
 }
