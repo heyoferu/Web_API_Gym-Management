@@ -17,7 +17,7 @@ public class InitDb : DbContext
     
     public virtual DbSet<Memberships> Memberships { get; set; }
     
-    public virtual DbSet<ProductPayments> ProductPayments { get; set; }
+    public virtual DbSet<ProductsPayments> ProductsPayments { get; set; }
     
     public virtual DbSet<Products> Products { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
