@@ -23,6 +23,8 @@ builder.Services.AddTransient<IEmployees, EmployeesServices>();
 builder.Services.AddTransient<IMembers, MembersServices>();
 builder.Services.AddTransient<IMemberships, MembershipsServices>();
 builder.Services.AddTransient<IProducts, ProductsServices>();
+builder.Services.AddTransient<IProductsPayments, ProductsPaymentsServices>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
