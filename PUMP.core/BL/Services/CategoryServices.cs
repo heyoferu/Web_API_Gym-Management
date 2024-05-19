@@ -30,29 +30,41 @@ public class CategoryServices : ICategory
         return Task.FromResult(result);
     }
 
-    public Task<List<Category>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Category> list = new List<Category>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Category
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new Category()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Description = item.Description
-                });
+                var query = (from item in connection.Category
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Description
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Category
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Description
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
-        
     }
 
     public Task<bool> Update(Category category)

@@ -28,9 +28,13 @@ public class CategoryController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> ReadCategory()
+    public async Task<IActionResult> ReadCategory(int? id)
     {
-        var result = await this._category.Read();
+        var result = await this._category.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
         return Ok(result);
     }
     
