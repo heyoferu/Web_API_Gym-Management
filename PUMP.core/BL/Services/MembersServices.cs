@@ -32,29 +32,44 @@ public class MembersServices : IMembers
         return Task.FromResult(result);
     }
 
-    public Task<List<Members>> Read()
+    public Task<object?> Read(int? id)
     {
-        List<Members> list = new List<Members>();
         using (var connection = new data.SQLServer.InitDb())
         {
-            var query = (
-                from item in connection.Members
-                select item
-            ).ToList();
-
-            foreach (var item in query)
+            if (id.HasValue)
             {
-                list.Add(new Members()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Lastname = item.Lastname,
-                    Age = item.Age,
-                    Mail = item.Mail,
-                });
+                var query = (from item in connection.Members
+                    where item.Id == id.Value
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Lastname,
+                        item.Age,
+                        item.Mail
+                    }).FirstOrDefault();
+                return Task.FromResult<object?>(query);
             }
-            
-            return Task.FromResult(list);
+
+            if (id == null)
+            {
+                var query = (
+                    from item in connection.Members
+                    select new
+                    {
+                        item.Id,
+                        item.Name,
+                        item.Lastname,
+                        item.Age,
+                        item.Mail
+                    }).ToList();
+                
+                return Task.FromResult<object?>(query);
+            }
+            else
+            {
+                return Task.FromResult<object?>(null);
+            }
         }
     }
 

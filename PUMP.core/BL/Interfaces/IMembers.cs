@@ -6,7 +6,7 @@ public interface IMembers
     Task<bool> Create(models.Members members);
     
     // Read all members
-    Task<List<models.Members>> Read();
+    Task<object?> Read(int? id);
     
     // Update members
     Task<bool> Update(models.Members members);

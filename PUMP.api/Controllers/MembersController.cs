@@ -29,9 +29,13 @@ public class MembersController : ControllerBase
     }
     
     [HttpGet]
-    public async Task<IActionResult> ReadMembers()
+    public async Task<IActionResult> ReadMembers(int? id)
     {
-        var result = await this._members.Read();
+        var result = await this._members.Read(id);
+        if (result == null)
+        {
+            return BadRequest(result);
+        }
         return Ok(result);
     }
 
