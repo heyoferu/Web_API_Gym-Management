@@ -23,8 +23,6 @@ public class EmployeesServices : IEmployees
                 emp.Name = employees.Name;
                 emp.Lastname = employees.Lastname;
                 emp.Age = employees.Age;
-                emp.Mail = employees.Mail;
-                emp.Password = employees.Password;
                 connection.Employees.Add(emp);
                 result = connection.SaveChanges() > 0;
             }
@@ -71,8 +69,6 @@ public class EmployeesServices : IEmployees
                 query.Name = employees.Name;
                 query.Lastname = employees.Lastname;
                 query.Age = employees.Age;
-                query.Mail = employees.Mail;
-                query.Password = employees.Password;
                 result = connection.SaveChanges() > 0;
             }
         }
@@ -98,9 +94,6 @@ public class EmployeesServices : IEmployees
                         Name = item.Name,
                         Lastname = item.Lastname,
                         Age = item.Age,
-                        Mail = item.Mail,
-                        Password = item.Password,
-                        
                     });
             }
             
