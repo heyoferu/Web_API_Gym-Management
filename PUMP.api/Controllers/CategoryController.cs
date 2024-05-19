@@ -50,9 +50,9 @@ public class CategoryController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteCategory([FromBody] Category category)
+    public async Task<IActionResult> DeleteCategory(int? id)
     {
-        var result = await this._category.Delete(category);
+        var result = await this._category.Delete(id);
         if (result == false)
         {
             return BadRequest(result);
