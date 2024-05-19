@@ -6,9 +6,18 @@ namespace PUMP.data.SQLServer;
 
 public class InitDb : DbContext
 {
+    public virtual DbSet<Accesses> Accesses { get; set; }
+    
+    public virtual DbSet<Category> Category { get; set; }
+    
+    public virtual DbSet<DetailMemberships> DetailMemberships { get; set; }
     public virtual DbSet<Employees> Employees { get; set; }
     
     public virtual DbSet<Members> Members { get; set; }
+    
+    public virtual DbSet<Memberships> Memberships { get; set; }
+    
+    public virtual DbSet<ProductPayments> ProductPayments { get; set; }
     
     public virtual DbSet<Products> Products { get; set; }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
