@@ -1,6 +1,6 @@
 namespace PUMP.models;
 
-public class ProductPayments
+public class ProductsPayments
 {
     public int Id { get; set; }
     public int Employee { get; set; }
