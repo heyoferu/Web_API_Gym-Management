@@ -94,14 +94,14 @@ public class DetailMembershipsServices : IDetailMemberships
         return Task.FromResult(result);
     }
 
-    public Task<bool> Delete(DetailMemberships detailMemberships)
+    public Task<bool> Delete(int? id)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.DetailMemberships
-                where item.Id == detailMemberships.Id
+                where item.Id == id.Value
                 select item
             ).FirstOrDefault();
 
