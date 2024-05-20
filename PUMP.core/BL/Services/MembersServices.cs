@@ -98,14 +98,14 @@ public class MembersServices : IMembers
         return Task.FromResult(result);
     }
 
-    public Task<bool> Delete(Members members)
+    public Task<bool> Delete(int? id)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Members
-                where item.Id == members.Id
+                where item.Id == id.Value
                 select item
             ).FirstOrDefault();
 

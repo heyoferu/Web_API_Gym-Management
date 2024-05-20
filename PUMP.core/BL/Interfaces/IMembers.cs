@@ -12,6 +12,6 @@ public interface IMembers
     Task<bool> Update(models.Members members);
     
     // Delete members
-    Task<bool> Delete(models.Members members);
+    Task<bool> Delete(int? id);
     
 }
