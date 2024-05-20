@@ -94,14 +94,14 @@ public class EmployeesServices : IEmployees
         return Task.FromResult(result);
     }
     
-    public Task<bool> Delete(Employees employees)
+    public Task<bool> Delete(int? id)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Employees
-                where item.Id == employees.Id
+                where item.Id == id.Value
                 select item
             ).FirstOrDefault();
 

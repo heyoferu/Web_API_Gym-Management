@@ -51,9 +51,9 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteEmployees([FromBody] Employees employees)
+    public async Task<IActionResult> DeleteEmployees(int? id)
     {
-        var result = await this._employees.Delete(employees);
+        var result = await this._employees.Delete(id);
         if (result == false)
         {
             return BadRequest(result);
