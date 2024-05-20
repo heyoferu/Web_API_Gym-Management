@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PUMP.core.BL.Interfaces;
 using PUMP.models;
@@ -27,7 +28,8 @@ public class AuthController : ControllerBase
 
         return Ok(result);
     }
-
+    
+    [Authorize]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] Users users)
     {

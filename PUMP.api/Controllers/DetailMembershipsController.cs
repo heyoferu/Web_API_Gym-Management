@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PUMP.core.BL.Interfaces;
 using PUMP.models;
 
 namespace PUMP.api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("v1/memberships/details")]
 public class DetailMembershipsController : ControllerBase
