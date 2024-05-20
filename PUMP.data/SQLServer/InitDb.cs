@@ -6,6 +6,8 @@ namespace PUMP.data.SQLServer;
 
 public class InitDb : DbContext
 {
+    
+    public virtual DbSet<Users> Users { get; set; }
     public virtual DbSet<Accesses> Accesses { get; set; }
     
     public virtual DbSet<Category> Category { get; set; }
