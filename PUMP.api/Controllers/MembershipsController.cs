@@ -50,9 +50,9 @@ public class MembershipsController : ControllerBase
     }
 
     [HttpDelete]
-    public async Task<IActionResult> DeleteMemberships([FromBody] Memberships memberships)
+    public async Task<IActionResult> DeleteMemberships(int? id)
     {
-        var result = await this._memberships.Delete(memberships);
+        var result = await this._memberships.Delete(id);
         if (result == false)
         {
             return BadRequest(result);
