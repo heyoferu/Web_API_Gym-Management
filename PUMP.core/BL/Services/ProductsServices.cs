@@ -100,14 +100,14 @@ public class ProductsServices : IProducts
         return Task.FromResult(result);
     }
 
-    public Task<bool> Delete(Products products)
+    public Task<bool> Delete(int? id)
     {
         bool result = false;
         using (var connection = new data.SQLServer.InitDb())
         {
             var query = (
                 from item in connection.Products
-                where item.Id == products.Id
+                where item.Id == id.Value
                 select item
             ).FirstOrDefault();
 
