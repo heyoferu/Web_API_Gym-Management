@@ -1,4 +1,4 @@
-# Gym API Management wrriten in C# with .net core
+# Gym API Management written in C# with .net core
 
 ## Software Structure
 
