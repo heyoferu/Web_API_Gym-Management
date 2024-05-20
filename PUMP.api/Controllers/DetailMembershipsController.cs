@@ -5,7 +5,7 @@ using PUMP.models;
 namespace PUMP.api.Controllers;
 
 [ApiController]
-[Route("v1/detailMemberships")]
+[Route("v1/memberships/details")]
 public class DetailMembershipsController : ControllerBase
 {
     private readonly IDetailMemberships _detailMemberships;

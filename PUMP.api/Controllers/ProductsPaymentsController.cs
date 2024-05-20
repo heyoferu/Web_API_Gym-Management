@@ -5,7 +5,7 @@ using PUMP.models;
 namespace PUMP.api.Controllers;
 
 [ApiController]
-[Route("v1/productPayments")]
+[Route("v1/product/payments")]
 public class ProductsPaymentsController : ControllerBase
 {
     private readonly IProductsPayments _productPayments;
