@@ -29,7 +29,7 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
     
-    [Authorize]
+    [Authorize(Policy = "Administrator")]
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] Users users)
     {
