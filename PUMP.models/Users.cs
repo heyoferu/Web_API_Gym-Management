@@ -11,4 +11,7 @@ public class Users
     
     [JsonIgnore] 
     public byte[]? Salt { get; set; }
+
+    [JsonIgnore]
+    public bool Admin { get; set; }
 }
