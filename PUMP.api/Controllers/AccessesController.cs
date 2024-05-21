@@ -5,7 +5,6 @@ using PUMP.models;
 
 namespace PUMP.api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("v1/accesses")]
 public class AccessesController : ControllerBase
@@ -17,6 +16,7 @@ public class AccessesController : ControllerBase
         _accesses = accesses;
     }
     
+    [Authorize(Policy = "General")]
     [HttpPost]
     public async Task<IActionResult> CreateAccesses([FromBody] Accesses accesses)
     {
@@ -29,6 +29,7 @@ public class AccessesController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "General")]
     [HttpGet]
     public async Task<IActionResult> ReadAccesses(int? id)
     {
@@ -41,6 +42,7 @@ public class AccessesController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize(Policy = "Administrator")]
     [HttpPut]
     public async Task<IActionResult> UpdateAccesses([FromBody] Accesses accesses)
     {
@@ -52,6 +54,7 @@ public class AccessesController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpDelete]
     public async Task<IActionResult> DeleteAccesses(int? id)
     {
