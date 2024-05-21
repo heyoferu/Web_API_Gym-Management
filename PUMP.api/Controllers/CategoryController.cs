@@ -5,7 +5,6 @@ using PUMP.models;
 
 namespace PUMP.api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("v1/category")]
 public class CategoryController : ControllerBase
@@ -17,6 +16,7 @@ public class CategoryController : ControllerBase
         _category = category;
     }
     
+    [Authorize(Policy = "Adminstrator")]
     [HttpPost]
     public async Task<IActionResult> CreateCategory([FromBody] Category category)
     {
@@ -29,6 +29,7 @@ public class CategoryController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "General")]
     [HttpGet]
     public async Task<IActionResult> ReadCategory(int? id)
     {
@@ -40,6 +41,7 @@ public class CategoryController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize(Policy = "Administrator")]
     [HttpPut]
     public async Task<IActionResult> UpdateCategory([FromBody] Category category)
     {
@@ -51,6 +53,7 @@ public class CategoryController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpDelete]
     public async Task<IActionResult> DeleteCategory(int? id)
     {
