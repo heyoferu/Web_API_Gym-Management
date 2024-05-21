@@ -38,7 +38,8 @@ public class AuthServices : IAuth
                     {
                         Subject = new ClaimsIdentity(new Claim[]
                         {
-                            new Claim(ClaimTypes.Name, query.Username)
+                            new Claim(ClaimTypes.Name, query.Username),
+                            new Claim(ClaimTypes.Role, query.Admin ? "Admin": "Employee")
                         }),
                         Expires = DateTime.UtcNow.AddHours(1),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
