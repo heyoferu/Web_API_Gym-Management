@@ -16,6 +16,7 @@ public class ProductsPaymentsController : ControllerBase
         this._productPayments = productPayments;
     }
 
+    [Authorize(Policy = "General")]
     [HttpPost]
     public async Task<IActionResult> CreateProduct([FromBody] ProductsPayments productPayments)
     {
@@ -23,6 +24,7 @@ public class ProductsPaymentsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "General")]
     [HttpGet]
     public async Task<IActionResult> ReadProductsPayments(int? id)
     {
@@ -35,6 +37,7 @@ public class ProductsPaymentsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpPut]
     public async Task<IActionResult> UpdateProductsPayments([FromBody] ProductsPayments productPayments)
     {
@@ -42,6 +45,7 @@ public class ProductsPaymentsController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpDelete]
     public async Task<IActionResult> DeleteProduct(int? id)
     {
