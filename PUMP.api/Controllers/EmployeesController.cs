@@ -5,7 +5,6 @@ using PUMP.models;
 
 namespace PUMP.api.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("v1/employees")]
 public class EmployeesController : ControllerBase
@@ -17,6 +16,7 @@ public class EmployeesController : ControllerBase
         _employees = employees;
     }
     
+    [Authorize(Policy = "Administrator")]
     [HttpPost]
     public async Task<IActionResult> CreateEmployees([FromBody] Employees employees)
     {
@@ -29,6 +29,7 @@ public class EmployeesController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpGet]
     public async Task<IActionResult> ReadEmployees(int? id)
     {
@@ -41,6 +42,7 @@ public class EmployeesController : ControllerBase
         return Ok(result);
     }
     
+    [Authorize(Policy = "Administrator")]
     [HttpPut]
     public async Task<IActionResult> UpdateEmployees([FromBody] Employees employees)
     {
@@ -52,6 +54,7 @@ public class EmployeesController : ControllerBase
         return Ok(result);
     }
 
+    [Authorize(Policy = "Administrator")]
     [HttpDelete]
     public async Task<IActionResult> DeleteEmployees(int? id)
     {
